@@ -16,10 +16,14 @@ func Test(t *testing.T) {
 	secretAccessKey := os.Getenv("SECRET_ACCESS_KEY")
 	region := os.Getenv("AWS_REGION")
 	bucket := os.Getenv("S3_BUCKET")
+	endpoint := os.Getenv("S3_ENDPOINT")
+	acl := os.Getenv("S3_ACL")
 
 	if accessKeyID == "" ||
 		secretAccessKey == "" ||
 		region == "" ||
+		endpoint == "" ||
+		acl == "" ||
 		bucket == "" {
 		t.SkipNow()
 	}
@@ -28,6 +32,8 @@ func Test(t *testing.T) {
 		SecretAccessKey: secretAccessKey,
 		Region:          region,
 		Bucket:          bucket,
+		Endpoint:        &endpoint,
+		ACL:             acl,
 	})
 	if err != nil {
 		t.Fatal(err)
